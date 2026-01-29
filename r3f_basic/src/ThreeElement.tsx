@@ -21,6 +21,8 @@ export default function ThreeElement() {
     <>
       <directionalLight position={[5, 5, 5]} />
       <mesh ref={boxRef} rotation={[THREE.MathUtils.degToRad(45),THREE.MathUtils.degToRad(45),0]}>
+        {/* geometry: 모양
+        material: 색상 */}
         <boxGeometry />
         <meshStandardMaterial color="red" />
       </mesh>
