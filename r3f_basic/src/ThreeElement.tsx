@@ -1,10 +1,14 @@
 import * as THREE from 'three';
 import { useThree, useFrame } from '@react-three/fiber'
 import { useRef } from 'react';
+import { useControls } from 'leva'
 
 export default function ThreeElement() {
   const {size, gl, scene, camera} = useThree();
   const boxRef = useRef<THREE.Mesh>(null);
+  const box = useControls({
+    rotation: {value: 0, min: -360, max: 360, step: 1}
+  })
 
   // scene에 대한 변화가 일어난 것들은 모두 useFrame 안에 넣어 다시 렌더링을 해줘야 제대로 동작을 한다.
   useFrame((state, delta) => {
@@ -20,7 +24,7 @@ export default function ThreeElement() {
   return (
     <>
       <directionalLight position={[5, 5, 5]} />
-      <mesh ref={boxRef} rotation={[THREE.MathUtils.degToRad(45),THREE.MathUtils.degToRad(45),0]}>
+      <mesh ref={boxRef} rotation={[THREE.MathUtils.degToRad(45),THREE.MathUtils.degToRad(box.rotation),0]}>
         {/* geometry: 모양
         material: 색상 */}
         <boxGeometry />
